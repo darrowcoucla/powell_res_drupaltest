@@ -1,4 +1,4 @@
-rc_res_test
-===========
+powell_res_test
+===============
 
-RC Res module for DrupalTest
+Powell Res module for DrupalTest
