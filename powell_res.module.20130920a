@@ -83,13 +83,6 @@ function powell_res_menu() {
     'access callback' => TRUE,
     'menu_name' => 'navigation',
   );
-  $items['libraries/powelllibrary/resource-reservation-logout'] = array(
-    'title' => 'Powell Resource Reservations Logout',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('powell_res_logout_handler_submit'),
-    'access callback' => TRUE,
-    'menu_name' => 'navigation',
-  );
   return $items;
 }
 
@@ -128,7 +121,7 @@ function powell_res_form_page_one($form, &$form_state) {
   // this reads PRODUCTION DATA in the Resource Scheduler database; USE THIS ON PRODUCTION
   // this reads PRODUCTION DATA in the Resource Scheduler database; USE THIS ON PRODUCTION
   // this reads PRODUCTION DATA in the Resource Scheduler database; USE THIS ON PRODUCTION
-  // $dev_host_resource_base = 'https://webservices.library.ucla.edu'; // normally use https (this line) but https is not currently working (20130401, 20130514, )
+  $dev_host_resource_base = 'https://webservices.library.ucla.edu'; // normally use https (this line) but https is not currently working (20130401, 20130514, )
 
   //$dev_host_resource_base = 'http://webservices.library.ucla.edu'; // temporarily use this while the https (next line) is not working
   // test: https://webservices.library.ucla.edu/rcres/patron/group/502673598
@@ -138,7 +131,7 @@ function powell_res_form_page_one($form, &$form_state) {
   // this reads PRODUCTION DATA in the Resource Scheduler database; USE THIS ON DEVELOPMENT
   // this reads PRODUCTION DATA in the Resource Scheduler database; USE THIS ON DEVELOPMENT
   // this reads PRODUCTION DATA in the Resource Scheduler database; USE THIS ON DEVELOPMENT
-  $dev_host_resource_base = 'http://webservices-dev.library.ucla.edu'; // normally use https (this line) but https is not currently working (20130401, 20130514, )
+//  $dev_host_resource_base = 'http://webservices-dev.library.ucla.edu'; // normally use https (this line) but https is not currently working (20130401, 20130514, )
 
 
 
@@ -158,7 +151,7 @@ function powell_res_form_page_one($form, &$form_state) {
 //} else{
 //  print_r(': >>>EMPTY $_SERVER[SHIBUCLAUNIVERSITYID]<<<');
 //}
-//($_SERVER);
+//krumo($_SERVER);
 
 
   // Jump to appropriate page if necessary
@@ -563,7 +556,6 @@ function powell_res_form_page_three($form, &$form_state) {
       '#type'  => 'item',
       '#markup' => t('<font color=red>Reservation(s) deleted</font>'),
     );
-  rc_session_variable_set('rc-res','reservation_was_deleted', 0);
   } else {
     $form['description4'] = array();
   }
@@ -2267,55 +2259,55 @@ function session_variable_check_session()
 	return session_id() != '';
 	}
 
-function session_variable_check_module($module4sv)
+function session_variable_check_module($module)
 	{
-	$module_safe = session_variable_safe($module4sv);
-	if($module_safe !== $module4sv or isset($_SESSION[$module4sv]))
+	$module_safe = session_variable_safe($module);
+	if($module_safe !== $module or isset($_SESSION[$module]))
 		{
 		return false;
 		}
 	return true;
 	}
 
-function session_variable_delete($module4sv, $name)
+function session_variable_delete($module, $name)
 	{
-	if(session_variable_is($module4sv, $name))
+	if(session_variable_is($module, $name))
 		{
-		$module4sv = session_variable_safe($module4sv);
+		$module = session_variable_safe($module);
 		$name = session_variable_safe($name);
-		unset($_SESSION[$module4sv][$name]);
-		if(!count($_SESSION[$module4sv]))
+		unset($_SESSION[$module][$name]);
+		if(!count($_SESSION[$module]))
 			{
-			unset($_SESSION[$module4sv]);
+			unset($_SESSION[$module]);
 			}
 		return true;
 		}
 	return false;
 	}
 
-function session_variable_is($module4sv, $name)
+function session_variable_is($module, $name)
 	{
-	$module4sv = session_variable_safe($module4sv);
+	$module = session_variable_safe($module);
 	$name = session_variable_safe($name);
-	return (isset($_SESSION[$module4sv]) and isset($_SESSION[$module4sv][$name]));
+	return (isset($_SESSION[$module]) and isset($_SESSION[$module][$name]));
 	}
 
-function session_variable_get($module4sv, $name, $default_value = '')
+function session_variable_get($module, $name, $default_value = '')
 	{
-	if(session_variable_is($module4sv, $name))
+	if(session_variable_is($module, $name))
 		{
-		$module4sv = session_variable_safe($module4sv);
+		$module = session_variable_safe($module);
 		$name = session_variable_safe($name);
-		return $_SESSION[$module4sv][$name];
+		return $_SESSION[$module][$name];
 		}
 	return $default_value;
 	}
 
-function session_variable_set($module4sv, $name, $value = '')
+function session_variable_set($module, $name, $value = '')
 	{
-	$module4sv = session_variable_safe($module4sv);
+	$module = session_variable_safe($module);
 	$name = session_variable_safe($name);
-	$_SESSION[$module4sv][$name] = $value;
+	$_SESSION[$module][$name] = $value;
 	}
 
 /*
