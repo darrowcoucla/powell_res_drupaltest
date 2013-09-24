@@ -302,6 +302,7 @@ function powell_res_form_page_three($form, &$form_state) {
       //print_r($working_uid);
     }
   } else {
+    $working_uid = '502673598'; // temp until shib works for Powell-Res on drupaltest and production
       //print_r('Unable to login.'); // Improvement needed; error handling needed here
   }
 
