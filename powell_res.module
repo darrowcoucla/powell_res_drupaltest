@@ -2145,7 +2145,6 @@ function powell_res_get_resources_for_period($form, $form_state) {
 
   $dev_host_resource_base = session_variable_get('powell-res','dev_host_resource_base');
   $request_url = '$dev_host_resource_base'.'/rcres/availablerooms/startingat/'."$rdate"."+"."$rtime12h".'%3a'."$rtime12m".'+'."$rtime12a".'/length/'."$rlength".'/where/'."$ucla_locale";
-krumo($request_url);
   $request_headers = array('Content-Type' => 'application/x-www-form-urlencoded');
   $request_method = 'POST';
   $data = '';
