@@ -76,7 +76,7 @@ function powell_res_menu() {
 
 ////  global $powell_res_get_user_category;
   $items = array();
-  $items['reservations/powell'] = array(
+  $items['libraries/researchlibrary/research-commons-reservation/powell'] = array(
     'title' => 'Powell Resource Reservations',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('powell_res_form_page_one'),
