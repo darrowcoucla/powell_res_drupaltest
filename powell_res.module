@@ -302,7 +302,7 @@ function powell_res_form_page_three($form, &$form_state) {
       //print_r($working_uid);
     }
   } else {
-      //print_r('Unable to login.'); // Improvement needed; error handling needed here
+       //print_r('Unable to login.'); // Improvement needed; error handling needed here
   }
 
 //  if ( $user_powell->name == "darrowco" ) {
