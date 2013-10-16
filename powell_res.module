@@ -752,7 +752,7 @@ function powell_res_form_page_four($form, &$form_state) {
 <br>
 Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish &nbsp;&nbsp;&nbsp;<br>
 <b>Please choose a start time within the next 24 hours</b><br>
-(before ').$earliest_new_reservation_time_date.')<br> and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">Powell hours</a>.<br>'
+(before ').$earliest_new_reservation_time_date.')<br> that occurs during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">Powell hours</a>.<br>'
     );
   }else if( $userDateTime < $nowDate){
     $form['description'] = array
@@ -762,7 +762,7 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
 <br>
 Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish &nbsp;&nbsp;&nbsp;<br>
 <b>Please choose a start time within the next 24 hours</b><br>
-(between now and ').$earliest_new_reservation_time_date.') and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">Powell hours.</a><br>'
+(between now and ').$earliest_new_reservation_time_date.') that occurs during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">Powell hours.</a><br>'
     );
   }else{
     $form['description'] = array
@@ -774,7 +774,7 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
 		      <BR>
 		      Start your reservation within the next 24 hours<BR>
 		      <BR>
-		      <b>Start before ').$earliest_new_reservation_time.' tomorrow</b> ('.$earliest_new_reservation_time_date.') and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">Powell hours</a>.<br>'
+		      <b>Start before ').$earliest_new_reservation_time.' tomorrow</b> ('.$earliest_new_reservation_time_date.') and during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">Powell hours</a>.<br>'
     );
   }
 
