@@ -1,6 +1,12 @@
 <?php
 
 /**********************************************************************************************************/
+/*** krumo print time example for debugging time problems *************************************************/
+/**********************************************************************************************************/
+//krumo(date('g:ia \o\n l jS F Y', $zone[0]));
+
+
+/**********************************************************************************************************/
 /*** Master validation function for the Powell-Res form *******************************************************/
 /**********************************************************************************************************/
 /**
@@ -292,6 +298,7 @@ function powell_res_form_page_three($form, &$form_state) {
 
   // get user category here
   $powell_res_get_user_category = powell_res_get_user_category($working_uid);
+  $powell_res_get_user_category = 'Undergraduate'; // temporary override of the true user category to allow powell to have one set of business rules for all categories
   session_variable_set('powell-res','powell_res_get_user_category', $powell_res_get_user_category);
 
   // TEMP FOR TESTING
@@ -740,9 +747,14 @@ function powell_res_form_page_four($form, &$form_state) {
 
   // dhc here: check undergrad pulling $my_resv_lim from business rules
 
+
   // UNDERGRAD SECTION
   if ( $my_resv_lim == 1 ){
     $maxDate = strtotime("now".' +1 day');
+
+    $zone[0] = strtotime("now");
+    $zone[1] = strtotime("now".' +1 day');
+    session_variable_set('powell-res','zone',$zone);
 
   if( $userDateTime > $earliest_new_reservation){
     $form['description'] = array
@@ -787,8 +799,6 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
   $zcnt = 0;
   $existing_resv = session_variable_get('powell-res','lcnt');
   $options = session_variable_get('powell-res','options');
-
-
 
   // if no reservation exists
   if( $existing_resv == 0 ){
