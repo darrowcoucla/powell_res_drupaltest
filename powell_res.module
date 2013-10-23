@@ -42,7 +42,7 @@ function powell_res_form_page_one_validate($form, &$form_state) {
     if (!$form_state['values']['date']) {
       form_set_error('date', 'Please enter a date and time.');
     }
-  } else if (!empty($form_state['page_num']) && $form_state['page_num'] == 5) {
+  } else if (!empty($form_state['page_num']) && $form_state['page_num'] == 5 && $form_state['values']['op'] != 'Back') { // allow back even if missing values
     if (!$form_state['values']['table']) {
       form_set_error('date', 'Please choose a resource.');
     }
@@ -790,6 +790,7 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
     );
   }
 
+
   // GRADUATE, STAFF SECTION
   } else {
 //  } else if ( $my_resv_lim > 1 ){
@@ -841,7 +842,7 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
     }
     // END - calculate zones time within which a reservation can be made  
   }
-
+  } // else if ( $my_resv_lim > 1 )
   // save the zones for use in the handler
   session_variable_set('powell-res','zone',$zone);
 
@@ -882,7 +883,7 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
     session_variable_set('powell-res','no_res_available',0);
 
 form_set_error('', 'There are no reservations available at the time you chose, please choose a different start time.<br>
-Also, please make the reservation during hours of operation. See <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">YRL hours</a>.');
+Also, please make the reservation during hours of operation. See <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">College Library hours</a>.');
 
     $zones = ucfirst(session_variable_get('powell-res','name_first')).' '.ucfirst(session_variable_get('powell-res','name_last')).'&nbsp;( <a href="powell-logout">logout</a> )<br><br>
 Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish &nbsp;&nbsp;&nbsp;<br>
@@ -890,14 +891,14 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
 		      Start date/time must fall within this range:<br>
 		      <b>'
 		      .$zoneRange.'</b>
-		      <br>and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">YRL hours</a><br>
+		      <br>and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">College Library hours</a><br>
 		      <br><br>
 		      <b>Enter start date/time:</b>';
   } else if( $outOfRange == 1 ) {
     session_variable_set('powell-res','no_res_available',0);
 
 form_set_error('', 'Please choose a start time in one of the following time slot(s)<br>(reservations can be no more than '.$my_resv_lim.' day(s) into the future and must be at least 24 hours from any existing reservations.)<br>
-Also, please make the reservation during hours of operation. See <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">YRL hours</a>.');
+Also, please make the reservation during hours of operation. See <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">College Library hours</a>.');
 
     $zones = ucfirst(session_variable_get('powell-res','name_first')).' '.ucfirst(session_variable_get('powell-res','name_last')).'&nbsp;( <a href="powell-logout">logout</a> )<br><br>
 Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish &nbsp;&nbsp;&nbsp;<br>
@@ -905,7 +906,7 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
 		      Start date/time must fall within this range:<br>
 		      <b>'
 		      .$zoneRange.'</b>
-		      <br>and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">YRL hours</a><br>
+		      <br>and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">College Library hours</a><br>
 		      <br><br>
 		      <b>Enter start date/time:</b>';
   } else if( $firstAccess4 == 0 ) {
@@ -916,14 +917,14 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
 		      <b>'
 		      .$zoneRange.'</b>
 		      <br>and occur during building hours:<br>
-		      <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">YRL hours</a><br>
+		      <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">College Library hours</a><br>
 		      <br><br>
 		      <b>Enter start date/time:</b>';
 session_variable_set('powell-res','firstAccess4', 1);
   } else if( $firstAccess4 > 0 ) {
 
 form_set_error('', 'Please choose a start time in one of the following time slot(s)<br>(reservations can be no more than '.$my_resv_lim.' day(s) into the future and must be at least 24 hours from any existing reservations.)<br>
-Also, please make the reservation during hours of operation. See <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">YRL hours</a>.)');
+Also, please make the reservation during hours of operation. See <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">College Library hours</a>.)');
 
     $zones = ucfirst(session_variable_get('powell-res','name_first')).' '.ucfirst(session_variable_get('powell-res','name_last')).'&nbsp;( <a href="powell-logout">logout</a> )<br><br>
 Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish &nbsp;&nbsp;&nbsp;<br>
@@ -931,7 +932,7 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
 		      Start date/time must fall within this range:<br>
 		      <b>'
 		      .$zoneRange.'</b>
-		      <br>and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">YRL hours</a><br>
+		      <br>and occur during building hours: <a href="http://www.library.ucla.edu/about/college-library-hours" target="_new">College Library hours</a><br>
 		      <br><br>
 		      <b>Enter start date/time:</b>';
   }
@@ -963,7 +964,7 @@ Your Reservations > <b>Date & Time</b> > Available Resources > Details > Finish 
 		      <b>Start before ').$earliest_new_reservation_time.' tomorrow</b> ('.$earliest_new_reservation_time_date.')'
     );
   }
-  } // else if ( $my_resv_lim > 1 )
+//  } // else if ( $my_resv_lim > 1 )
 
   session_variable_set('powell-res','maxDate', $maxDate);
 
